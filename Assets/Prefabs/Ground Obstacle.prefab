@@ -111,3 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ab1f4c1675c0843b922abbc2d47910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveUpDown: 0
+  moveLeftRight: 0
+  speed: 2
+  height: 0.5
