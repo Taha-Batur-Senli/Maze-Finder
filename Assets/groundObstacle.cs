@@ -20,7 +20,7 @@ public class groundObstacle : MonoBehaviour
     {
         if(other.gameObject.GetComponent<SimpleSampleCharacterControl>() && other.GetType() == typeof(BoxCollider))
         {
-            Debug.Log("sad");
+            other.gameObject.GetComponent<SimpleSampleCharacterControl>().decrementHealth();
         }
     }
 }

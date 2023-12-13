@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject restartButton;
     [SerializeField] Vector3 startCoords;
+    public bool isContinuing;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
         Camera.GetComponent<cameraScript>().playerPos = player.transform;
         player.GetComponent<SimpleSampleCharacterControl>().man = this;
         player.GetComponent<SimpleSampleCharacterControl>().startPos = startCoords;
-
+        isContinuing = true;
         win.SetActive(false);
         lose.SetActive(false);
         restartButton.SetActive(false);
@@ -36,6 +37,8 @@ public class GameManager : MonoBehaviour
 
     public void endGame(bool won)
     {
+        player.SetActive(false);
+        isContinuing = false;
         inGame.SetActive(false);
         restartButton.SetActive(true);
         player.GetComponent<SimpleSampleCharacterControl>().m_moveSpeed = 0;

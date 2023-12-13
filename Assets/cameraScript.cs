@@ -5,6 +5,7 @@ using static UnityEditor.PlayerSettings;
 
 public class cameraScript : MonoBehaviour
 {
+    [SerializeField] public GameManager gameManager;
     [SerializeField] public Vector3 startPos;
     [SerializeField] public Quaternion startRot;
     [SerializeField] public Transform playerPos;
@@ -21,7 +22,7 @@ public class cameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.M))
+        if(Input.GetKey(KeyCode.M) && gameManager.isContinuing)
         {
             transform.position = largePos;
             transform.rotation = Quaternion.Euler(largeRotX, 0, 0);
