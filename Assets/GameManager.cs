@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] public TextMeshProUGUI healthAmount;
     [SerializeField] GameObject Camera;
     [SerializeField] GameObject inGame;
     [SerializeField] GameObject win;
@@ -22,6 +25,7 @@ public class GameManager : MonoBehaviour
         Camera.GetComponent<cameraScript>().playerPos = player.transform;
         player.GetComponent<SimpleSampleCharacterControl>().man = this;
         player.GetComponent<SimpleSampleCharacterControl>().startPos = startCoords;
+        healthAmount.text = player.GetComponent<SimpleSampleCharacterControl>().health.ToString();
         isContinuing = true;
         win.SetActive(false);
         lose.SetActive(false);
@@ -35,9 +39,25 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void playerShowBall()
+    {
+        player.GetComponent<SimpleSampleCharacterControl>().ball.SetActive(true);
+    }
+
+    public void playerHideBall()
+    {
+        player.GetComponent<SimpleSampleCharacterControl>().ball.SetActive(false);
+    }
+
     public void endGame(bool won)
     {
         player.SetActive(false);
+        player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
         isContinuing = false;
         inGame.SetActive(false);
         restartButton.SetActive(true);

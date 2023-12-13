@@ -16,6 +16,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         Direct
     }
 
+    [SerializeField] public GameObject ball;
     [SerializeField] public int health = 5;
     [SerializeField] public GameManager man;
     [SerializeField] public Vector3 startPos;
@@ -50,6 +51,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
     private void Awake()
     {
+        ball.SetActive(false);
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
     }
@@ -73,6 +75,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
     public void decrementHealth()
     {
         health--;
+        man.healthAmount.text = health.ToString();
 
         if(health <= 0)
         {
