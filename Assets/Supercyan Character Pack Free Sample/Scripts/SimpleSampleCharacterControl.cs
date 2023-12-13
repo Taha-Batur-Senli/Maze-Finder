@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SimpleSampleCharacterControl : MonoBehaviour
@@ -15,7 +16,11 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         Direct
     }
 
-    [SerializeField] private float m_moveSpeed = 2;
+    [SerializeField] public int health = 5;
+    [SerializeField] public GameManager man;
+    [SerializeField] public Vector3 startPos;
+
+    [SerializeField] public float m_moveSpeed = 2;
     [SerializeField] private float m_turnSpeed = 200;
     [SerializeField] private float m_jumpForce = 4;
 
@@ -62,6 +67,20 @@ public class SimpleSampleCharacterControl : MonoBehaviour
                 }
                 m_isGrounded = true;
             }
+        }
+    }
+
+    public void decrementHealth()
+    {
+        health--;
+
+        if(health <= 0)
+        {
+
+        }
+        else
+        {
+            transform.position = startPos;
         }
     }
 

@@ -18,6 +18,9 @@ public class groundObstacle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("sa");
+        if(other.gameObject.GetComponent<SimpleSampleCharacterControl>() && other.GetType() == typeof(BoxCollider))
+        {
+            Debug.Log("sad");
+        }
     }
 }
