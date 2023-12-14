@@ -7,7 +7,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] public TextMeshProUGUI healthAmount;
-    [SerializeField] GameObject Camera;
+    [SerializeField] GameObject CameraMain;
+    [SerializeField] GameObject CameraBack;
+    [SerializeField] GameObject CameraLeft;
+    [SerializeField] GameObject CameraRight;
     [SerializeField] GameObject inGame;
     [SerializeField] GameObject win;
     [SerializeField] GameObject lose;
@@ -19,10 +22,17 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CameraBack.SetActive(false);
+        CameraLeft.SetActive(false);
+        CameraRight.SetActive(false);
+        CameraMain.SetActive(true);
         player = Instantiate(player);
         player.transform.position = startCoords;
         player.transform.SetParent(gameObject.transform);
-        Camera.GetComponent<cameraScript>().playerPos = player.transform;
+        CameraMain.GetComponent<cameraScript>().playerPos = player.transform;
+        CameraLeft.GetComponent<cameraScript>().playerPos = player.transform;
+        CameraRight.GetComponent<cameraScript>().playerPos = player.transform;
+        CameraBack.GetComponent<cameraScript>().playerPos = player.transform;
         player.GetComponent<SimpleSampleCharacterControl>().man = this;
         player.GetComponent<SimpleSampleCharacterControl>().startPos = startCoords;
         healthAmount.text = player.GetComponent<SimpleSampleCharacterControl>().health.ToString();
@@ -36,7 +46,34 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKey(KeyCode.Q))
+        {
+            CameraBack.SetActive(false);
+            CameraLeft.SetActive(true);
+            CameraRight.SetActive(false);
+            CameraMain.SetActive(false);
+        }
+        else if(Input.GetKey(KeyCode.E))
+        {
+            CameraBack.SetActive(false);
+            CameraLeft.SetActive(false);
+            CameraRight.SetActive(true);
+            CameraMain.SetActive(false);
+        }
+        else if(Input.GetKey(KeyCode.R))
+        {
+            CameraBack.SetActive(true);
+            CameraLeft.SetActive(false);
+            CameraRight.SetActive(false);
+            CameraMain.SetActive(false);
+        }
+        else if(Input.GetKey(KeyCode.T))
+        {
+            CameraBack.SetActive(false);
+            CameraLeft.SetActive(false);
+            CameraRight.SetActive(false);
+            CameraMain.SetActive(true);
+        }
     }
 
     public void restart()
