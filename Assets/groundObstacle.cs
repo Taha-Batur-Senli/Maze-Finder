@@ -43,7 +43,7 @@ public class groundObstacle : MonoBehaviour
     {
         var pos = transform.position;
         var newX = startX + height * Mathf.Sin(Time.time * speed);
-        transform.position = new Vector3(pos.x, newX, pos.z);
+        transform.position = new Vector3(newX, pos.y, pos.z);
         yield return new WaitForEndOfFrame();
     }
 
