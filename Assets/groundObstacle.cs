@@ -8,16 +8,19 @@ public class groundObstacle : MonoBehaviour
     [SerializeField] bool spin = false;
     [SerializeField] bool spinLeft = false;
     [SerializeField] bool moveLeftRight = false;
+    [SerializeField] bool moveinZ = false;
     [SerializeField] float speed = 2f;
     [SerializeField] float height = 0.5f;
     float startY;
     float startX;
+    float startZ;
 
     // Start is called before the first frame update
     void Start()
     {
         startY = gameObject.transform.position.y;
-        startX = gameObject.transform.position.x;   
+        startX = gameObject.transform.position.x;
+        startZ = gameObject.transform.position.z;
     }
 
     // Update is called once per frame
@@ -30,6 +33,10 @@ public class groundObstacle : MonoBehaviour
         else if(moveLeftRight)
         {
             StartCoroutine(movingLeftRight());
+        }
+        else if (moveinZ)
+        {
+            StartCoroutine(movingInZ());
         }
         else if(spin)
         {
@@ -51,6 +58,14 @@ public class groundObstacle : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.2f);
+    }
+
+    IEnumerator movingInZ()
+    {
+        var pos = transform.position;
+        var newZ = startZ + height * Mathf.Sin(Time.time * speed);
+        transform.position = new Vector3(pos.x, pos.y, newZ);
+        yield return new WaitForEndOfFrame();
     }
 
     IEnumerator movingUpDown()

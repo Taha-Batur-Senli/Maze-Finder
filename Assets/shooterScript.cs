@@ -23,15 +23,21 @@ public class shooterScript : MonoBehaviour
     {
         time += Time.deltaTime;
 
-        if(time > shootInterval)
+        if(time >= shootInterval)
         {
-            GameObject bul = Instantiate(bullet);
-            bul.transform.SetParent(transform, false);
-            bul.GetComponent<bulletScript>().x = bulletx;
-            bul.GetComponent<bulletScript>().y = bullety;
-            bul.GetComponent<bulletScript>().z = bulletz;
-            time = 0;
+            StartCoroutine(shoot());
         }
+    }
+
+    IEnumerator shoot()
+    {
+        time = 0;
+        GameObject bul = Instantiate(bullet);
+        bul.transform.SetParent(transform, false);
+        bul.GetComponent<bulletScript>().x = bulletx;
+        bul.GetComponent<bulletScript>().y = bullety;
+        bul.GetComponent<bulletScript>().z = bulletz;
+        yield return new WaitForEndOfFrame();
     }
 
     private void OnTriggerEnter(Collider other)
