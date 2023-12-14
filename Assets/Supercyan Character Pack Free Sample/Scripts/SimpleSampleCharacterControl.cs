@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Modified simple sample character control with added methods and health system
+//Modified by Taha Batur Senli
+//Date: 14.12.2023
+
+//Note: All collisions and movement commands are altered to work only during gameplay.
+
 public class SimpleSampleCharacterControl : MonoBehaviour
 {
     private enum ControlMode
@@ -17,6 +23,8 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         Direct
     }
 
+    //These variables hold the ball item around the player, player's health, the game manager script in the scene
+    //and the player's starting position, respectively.
     [SerializeField] public GameObject ball;
     [SerializeField] public int health = 5;
     [SerializeField] public GameManager man;
@@ -73,6 +81,8 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         }
     }
 
+    //This method decrements the character's health and 
+    //ends the game if health gets reduced to zero.
     public void decrementHealth()
     {
         health--;
@@ -88,6 +98,8 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         }
     }
 
+    //This method is for increasing the player's
+    //health when they touch a health object.
     public void incrementHealth()
     {
         health++;
