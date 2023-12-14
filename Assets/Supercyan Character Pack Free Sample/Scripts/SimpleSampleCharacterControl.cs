@@ -88,6 +88,12 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         }
     }
 
+    public void incrementHealth()
+    {
+        health++;
+        man.healthAmount.text = health.ToString();
+    }
+
     private void OnCollisionStay(Collision collision)
     {
         ContactPoint[] contactPoints = collision.contacts;
