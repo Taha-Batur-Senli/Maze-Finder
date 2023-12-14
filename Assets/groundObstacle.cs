@@ -5,6 +5,8 @@ using UnityEngine;
 public class groundObstacle : MonoBehaviour
 {
     [SerializeField] bool moveUpDown = false;
+    [SerializeField] bool spin = false;
+    [SerializeField] bool spinLeft = false;
     [SerializeField] bool moveLeftRight = false;
     [SerializeField] float speed = 2f;
     [SerializeField] float height = 0.5f;
@@ -29,6 +31,26 @@ public class groundObstacle : MonoBehaviour
         {
             StartCoroutine(movingLeftRight());
         }
+        else if(spin)
+        {
+            StartCoroutine(spinObj());
+        }
+    }
+
+    IEnumerator spinObj()
+    {
+        var rot = transform.rotation;
+
+        if(spinLeft)
+        {
+            transform.rotation *= Quaternion.Euler(Vector3.left * Time.deltaTime * speed);
+        }
+        else
+        {
+            transform.rotation *= Quaternion.Euler(Vector3.right * Time.deltaTime * speed);
+        }
+
+        yield return new WaitForSeconds(0.2f);
     }
 
     IEnumerator movingUpDown()
